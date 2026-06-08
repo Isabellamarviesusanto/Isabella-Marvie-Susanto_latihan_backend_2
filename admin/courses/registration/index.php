@@ -48,3 +48,20 @@ while ($result = mysqli_fetch_assoc($query)) :
             <?= $result['created_at']; ?>
         </td>
     </tr>
+        <td>
+            <?php if ($result['is_followed_up'] == 0) : ?>
+                <a href="follow_up.php?id=<?= $result['id']; ?>"
+                   onclick="return confirm('Mark this registration as followed up?')">
+                   Sudah Follow Up
+                </a>
+            <?php else : ?>
+                <a href="cancel_follow_up.php?id=<?= $result['id']; ?>"
+                   onclick="return confirm('Cancel follow up status?')">
+                   Cancel Follow Up
+                </a>
+            <?php endif; ?>
+        </td>
+    </tr>
+<?php endwhile; ?>
+
+</table>
