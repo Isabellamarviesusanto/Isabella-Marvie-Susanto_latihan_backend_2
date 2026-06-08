@@ -23,3 +23,28 @@ $query = mysqli_query($conn, $sql);
         <th>Waktu Pendaftaran</th>
         <th></th>
     </tr>
+
+    <?php
+$no = 1;
+while ($result = mysqli_fetch_assoc($query)) :
+    $total_price = $result['course_price'] * $result['participant_count'];
+?>
+    <tr>
+        <td><?= $no++; ?></td>
+        <td><?= $result['full_name']; ?></td>
+        <td><?= $result['email']; ?></td>
+        <td><?= $result['phone_number']; ?></td>
+        <td><?= $result['course_title']; ?></td>
+        <td><?= $result['participant_count']; ?></td>
+        <td>Rp <?= number_format($total_price, 0, ',', '.'); ?></td>
+        <td>
+            <?php if ($result['is_followed_up'] == 1) : ?>
+                Followed Up oleh <?= $result['followed_up_by']; ?> <?= $result['followed_up_at']; ?>
+            <?php else : ?>
+                Pending
+            <?php endif; ?>
+        </td>
+        <td>
+            <?= $result['created_at']; ?>
+        </td>
+    </tr>
